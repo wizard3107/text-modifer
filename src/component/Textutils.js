@@ -1,6 +1,4 @@
-
 import React, {useState}from 'react'
-
 function Textutils(props) {
 	const [text, setText] = useState('')
    const handleUpClick= ()=>{
@@ -20,15 +18,20 @@ function Textutils(props) {
 	const handleReClick= ()=>{
 		// console.log("button was clicked");
 		const newtext = text;
-		const arr= newtext.split(" ");
-		const newtxt=arr.join("");
+		const arr= newtext.split(/[ ]+/);
+		const newtxt=arr.join(" ");
 		setText(newtxt);
 	}
 
 	const handleOnChange= (e)=>
 	{
-		setText(e.target.value);
-		
+		setText(e.target.value);	
+	}
+	const handleCopy=(e)=>
+	{
+		var text= document.getElementById("mybox");
+		text.select();
+		navigator.clipboard.writeText(text.value);
 	}
 	return ( 
 		<>
@@ -41,6 +44,7 @@ function Textutils(props) {
 		<button className='btn btn-primary mx-2 my-3' onClick={handleDnClick}>Convert to Lower Case</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleRtClick}>Remove text</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleReClick}>Remove Extra Space</button>
+		<button className='btn btn-primary mx-2 my-3' onClick={handleCopy}>Copy Text</button>
 	</div>
 	<div className='container my-4'>
 		<h1>Your Text Summary 
@@ -53,5 +57,4 @@ function Textutils(props) {
 	</>
 	)
 }
-
-export default Textutils
+export default Textutils;
