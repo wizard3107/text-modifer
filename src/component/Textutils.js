@@ -4,24 +4,56 @@ function Textutils(props) {
    const handleUpClick= ()=>{
 		// console.log("button was clicked");
 		const newtext = text.toUpperCase();
-		setText(newtext);
+		if(text===newtext)
+		{
+			props.showAlert('Text already in UPPER CASE!!','warning');
+		}
+		else
+		{
+			setText(newtext);
+			props.showAlert('Text converted to UPPER CASE!! Successfully','success');
+		}
 	}
 	const handleDnClick= ()=>{
 		// console.log("button was clicked");
 		const newtext = text.toLowerCase();
-		setText(newtext);
-	}
+		if(newtext === text)
+		{
+			props.showAlert('Text already in lower case!!','warning');
+		}
+		else
+		{
+			setText(newtext);
+			props.showAlert('Text converted to lower case!! Successfully','success');
+		}
+}
 	const handleRtClick= ()=>{
 		// console.log("button was clicked");
-		setText("");
-	}
+		if(text.length===0)
+		{
+			props.showAlert('Nothing present in the text box to clear!!','warning')
+		}
+		else
+		{
+			setText("");
+			props.showAlert('Text cleared!! Successfully','success');
+		}
+}
 	const handleReClick= ()=>{
 		// console.log("button was clicked");
 		const newtext = text;
 		const arr= newtext.split(/[ ]+/);
 		const newtxt=arr.join(" ");
-		setText(newtxt);
-	}
+		if(newtxt===text)
+		{
+			props.showAlert("Text Don't have Extra spaces!!",'warning');
+		}
+		else
+		{
+			setText(newtxt);
+			props.showAlert('Extra space removed from the text Successfully','success');
+		}
+}
 
 	const handleOnChange= (e)=>
 	{
@@ -32,6 +64,7 @@ function Textutils(props) {
 		var text= document.getElementById("mybox");
 		text.select();
 		navigator.clipboard.writeText(text.value);
+		props.showAlert('Text Copied!! Successfully','success');
 	}
 	return ( 
 		<div style={{backgroundColor:props.mode==='dark'?'rgb(12 21 49)':'white', color:props.mode==='dark'?'white':'black'}}>
@@ -42,18 +75,19 @@ function Textutils(props) {
 		</div>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleUpClick}>Convert to upper Case</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleDnClick}>Convert to Lower Case</button>
-		<button className='btn btn-primary mx-2 my-3' onClick={handleRtClick}>Remove text</button>
+		<button className='btn btn-primary mx-2 my-3' onClick={handleRtClick}>Clear text</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleReClick}>Remove Extra Space</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleCopy}>Copy Text</button>
 	</div>
 	<div className='container my-4'style={{backgroundColor:props.mode==='dark'?'rgb(12 21 49)':'white', color:props.mode==='dark'?'white':'black'}}>
 		<h1>Your Text Summary 
 		</h1>
-		<p>Your text contains {text.split(" ").length} words and {text.length} characters</p>
-		<p>time to read this text is {0.008*text.split(" ").length}</p>
+		<p><strong>{text.split(" ").length}</strong> words and <strong>{text.length}</strong> characters</p>
+		<p>Time to read this text is: <strong style={{color:'red'}}> {0.008*text.split(" ").length}</strong></p>
 		<h2>Preview</h2>
-		<p>{text}</p>
+		<p>{text.length>0?text:"enter some text in the text field to preview it here"}</p>
 	</div>
+	<hr/>
 	</div>
 	)
 }
