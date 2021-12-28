@@ -1,5 +1,5 @@
 {
-  "homepage": "https://myusername.github.io/my-app",
+  "homepage": "https://wizard3107.github.io/text-utils",
   "name": "text-utils",
   "version": "0.1.0",
   "private": true,
@@ -17,7 +17,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "start": "react-scripts start ",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

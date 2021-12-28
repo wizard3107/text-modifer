@@ -4,6 +4,11 @@ import About from './component/About';
 import Alert from './component/Alert';
 import Navbar from './component/Navbar';
 import Textutils from './component/Textutils';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
   const [mode,setMode]=useState('light');
@@ -33,15 +38,26 @@ showAlert('Light mode enabled Successfully','success')
     }
   }
   return (
-    <div className="app">
+    <Router>
+      <div>
+      <div className="app">
       <Navbar mode={mode} toggleMode={toggleMode}/>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Alert alert={alert}/>      
       <div className='container'>
-      <Alert alert={alert}/>
-      <Textutils showAlert={showAlert} heading="Enter The text to analyze" mode={mode}/>
-      <About mode={mode}/>
-      
+        <Routes>
+          <Route path={'/About'} element={<About mode={mode}/>}>
+          </Route>
+          <Route path={'/'} element={<Textutils showAlert={showAlert} heading="Enter The text to analyze" mode={mode}/>}>
+          </Route>
+        </Routes>
       </div>
-    </div>
+      </div>
+      </div>
+    </Router>
+    
+   
   );
 }
 
