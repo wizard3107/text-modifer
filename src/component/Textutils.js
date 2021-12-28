@@ -27,18 +27,18 @@ function Textutils(props) {
 	{
 		setText(e.target.value);	
 	}
-	const handleCopy=(e)=>
+	const handleCopy=()=>
 	{
 		var text= document.getElementById("mybox");
 		text.select();
 		navigator.clipboard.writeText(text.value);
 	}
 	return ( 
-		<>
-	<div className='container my-3'>
+		<div style={{backgroundColor:props.mode==='dark'?'rgb(12 21 49)':'white', color:props.mode==='dark'?'white':'black'}}>
+	<div className='container my-3' >
 		<h1> { props.heading } </h1> 
 		<div className = "mb-3" >
-		<textarea className = "form-control" id="mybox" rows="8" value={text} onChange={handleOnChange}></textarea> 
+		<textarea className = "form-control" id="mybox" rows="8" value={text} style={{backgroundColor:props.mode==='dark'?'rgb(12 21 49)':'white', color:props.mode==='dark'?'white':'black'}} onChange={handleOnChange}></textarea> 
 		</div>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleUpClick}>Convert to upper Case</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleDnClick}>Convert to Lower Case</button>
@@ -46,7 +46,7 @@ function Textutils(props) {
 		<button className='btn btn-primary mx-2 my-3' onClick={handleReClick}>Remove Extra Space</button>
 		<button className='btn btn-primary mx-2 my-3' onClick={handleCopy}>Copy Text</button>
 	</div>
-	<div className='container my-4'>
+	<div className='container my-4'style={{backgroundColor:props.mode==='dark'?'rgb(12 21 49)':'white', color:props.mode==='dark'?'white':'black'}}>
 		<h1>Your Text Summary 
 		</h1>
 		<p>Your text contains {text.split(" ").length} words and {text.length} characters</p>
@@ -54,7 +54,7 @@ function Textutils(props) {
 		<h2>Preview</h2>
 		<p>{text}</p>
 	</div>
-	</>
+	</div>
 	)
 }
 export default Textutils;
